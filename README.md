@@ -30,9 +30,10 @@ Ejecuta el contenedor de Open-WebUI usando el siguiente comando:
 docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://ollama:11434 -v open-webui:/app/backend/data --name open-webui --net=ollama_network --restart always ghcr.io/open-webui/open-webui:main
 ```
 ### 5. Descargar un Modelo de Lenguaje
-Inicia sesión en Open-WebUI. Busca y descarga el modelo  **llama3.2**.
-Una vez completada la descarga, verifica que el modelo aparece en la lista de modelos instalados.
-
+- Inicia sesión en Open-WebUI.
+- Busca y descarga el modelo  **llama3.2**.
+- Una vez completada la descarga, verifica que el modelo aparece en la lista de modelos instalados.
+- Mantener el contenedor **ollama** corriendo mientras ejecutas los cuadernos, **open-webui** no es necesario, sólo se utiliza para descargar el modelo.
 ## Instrucciones para Configurar el Entorno e Instalar las Dependencias
 Sigue estos pasos para configurar un entorno virtual y preparar el proyecto:
 
