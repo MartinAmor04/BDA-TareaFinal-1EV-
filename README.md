@@ -2,8 +2,39 @@
 
 Este repositorio contiene los recursos necesarios para la entrega final de la evaluación del módulo de Bases de Datos Avanzadas.
 
-## Instrucciones para Configurar el Entorno e Instalar las Dependencias
+## Instrucciones para Configurar y Ejecutar el Modelo Llama 3.2
+### 1. Crear la Red de Docker
+Primero, crea una red dedicada para el proyecto, que conectará los servicios necesarios:
+```bash
+docker network create ollama_network 
+```
+### 2. Ejecutar el Contenedor de Ollama 
+Inicia el contenedor de Ollama, que es el servicio que gestionará el modelo de lenguaje. Usa el siguiente comando para ejecutarlo sin GPU:
+```bash
+docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama --net=ollama_network ollama/ollama 
+```
+### 3. Verificar que Ollama Está en Funcionamiento
+Confirma que el servicio está activo ejecutando:
+```bash
+curl http://localhost:11434
+```
+Si todo está correcto, deberías ver la respuesta:
+```bash
+Ollama is running
+```
+### 4. Configurar Open-WebUI
+Open-WebUI proporciona una interfaz gráfica para gestionar los modelos y permite interactuar con ellos mediante un chat.
 
+Ejecuta el contenedor de Open-WebUI usando el siguiente comando:
+```bash
+docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=http://ollama:11434 -v open-webui:/app/backend/data --name open-webui --net=ollama_network --restart always ghcr.io/open-webui/open-webui:main
+```
+### 5. Descargar un Modelo de Lenguaje
+- Inicia sesión en Open-WebUI.
+- Busca y descarga el modelo  **llama3.2**.
+- Una vez completada la descarga, verifica que el modelo aparece en la lista de modelos instalados.
+- Mantener el contenedor **ollama** corriendo mientras ejecutas los cuadernos, **open-webui** no es necesario, sólo se utiliza para descargar el modelo.
+## Instrucciones para Configurar el Entorno e Instalar las Dependencias
 Sigue estos pasos para configurar un entorno virtual y preparar el proyecto:
 
 ### 1. Crear y Activar el Entorno Virtual
